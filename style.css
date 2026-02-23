@@ -1,24 +1,74 @@
+:root {
+    color-scheme: light;
+    --bg: #f0f0f0;
+    --surface: #ffffff;
+    --text: #333333;
+    --muted: #aaaaaa;
+    --chip: #eeeeee;
+    --shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    --accent: #4CAF50;
+    --accent-hover: #45a049;
+}
+
+body.theme-dark {
+    color-scheme: dark;
+    --bg: #0f1115;
+    --surface: #171a21;
+    --text: #e8e8e8;
+    --muted: #8b94a3;
+    --chip: #222733;
+    --shadow: 0 0 24px rgba(0, 0, 0, 0.45);
+    --accent: #6bd968;
+    --accent-hover: #59c056;
+}
+
 body {
     font-family: sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f0f0;
+    background-color: var(--bg);
     margin: 0;
+    color: var(--text);
 }
 
 .container {
     text-align: center;
-    background-color: #fff;
+    background-color: var(--surface);
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow);
+    width: min(520px, 92vw);
 }
 
 h1 {
     margin-bottom: 2rem;
-    color: #333;
+    color: var(--text);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.theme-toggle {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--muted);
+    border-radius: 999px;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+}
+
+.theme-toggle:hover {
+    border-color: var(--text);
+    background-color: rgba(127, 127, 127, 0.12);
 }
 
 .number-container {
@@ -32,17 +82,17 @@ h1 {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #eee;
+    background-color: var(--chip);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
+    color: var(--text);
 }
 
 #generate-btn {
-    background-color: #4CAF50;
+    background-color: var(--accent);
     color: white;
     padding: 1rem 2rem;
     border: none;
@@ -53,10 +103,10 @@ h1 {
 }
 
 #generate-btn:hover {
-    background-color: #45a049;
+    background-color: var(--accent-hover);
 }
 
 footer {
     margin-top: 2rem;
-    color: #aaa;
+    color: var(--muted);
 }

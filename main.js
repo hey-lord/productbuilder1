@@ -1,5 +1,35 @@
 const generateBtn = document.getElementById('generate-btn');
 const numberContainer = document.querySelector('.number-container');
+const themeToggle = document.getElementById('theme-toggle');
+const THEME_KEY = 'lotto-theme';
+
+const getSystemTheme = () => {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+    }
+    return 'light';
+};
+
+const applyTheme = (theme) => {
+    document.body.classList.toggle('theme-dark', theme === 'dark');
+    document.body.classList.toggle('theme-light', theme === 'light');
+    const isDark = theme === 'dark';
+    themeToggle.textContent = isDark ? 'Light mode' : 'Dark mode';
+    themeToggle.setAttribute('aria-pressed', String(isDark));
+};
+
+const initTheme = () => {
+    const saved = localStorage.getItem(THEME_KEY);
+    const theme = saved || getSystemTheme();
+    applyTheme(theme);
+};
+
+themeToggle.addEventListener('click', () => {
+    const isDark = document.body.classList.contains('theme-dark');
+    const next = isDark ? 'light' : 'dark';
+    localStorage.setItem(THEME_KEY, next);
+    applyTheme(next);
+});
 
 generateBtn.addEventListener('click', () => {
     numberContainer.innerHTML = '';
@@ -31,3 +61,5 @@ generateBtn.addEventListener('click', () => {
         numberContainer.appendChild(numberDiv);
     });
 });
+
+initTheme();
