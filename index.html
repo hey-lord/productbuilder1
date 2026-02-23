@@ -13,19 +13,20 @@
             <div>
                 <p class="eyebrow">Animal Face Test</p>
                 <h1>Are you more puppy or kitty today?</h1>
-                <p class="subtitle">Our model reads your vibe in real time. Turn on your camera, smile, and see your animal twin.</p>
+                <p class="subtitle">Upload a selfie and let our model decide your animal twin. No camera required.</p>
                 <div class="cta-row">
-                    <button id="start-btn" class="primary-btn" type="button">Start Camera</button>
+                    <label class="primary-btn upload-btn" for="photo-input">Upload Photo</label>
+                    <input id="photo-input" class="file-input" type="file" accept="image/*">
                     <button id="theme-toggle" class="ghost-btn" type="button" aria-pressed="false">Dark mode</button>
                 </div>
-                <p class="microcopy">We never store your video. All processing happens in your browser.</p>
+                <p class="microcopy">We never store your photo. All processing happens in your browser.</p>
             </div>
             <div class="hero-card">
                 <div class="card-header">
-                    <span>Live Preview</span>
+                    <span>Photo Preview</span>
                     <span id="status-pill" class="status-pill">Idle</span>
                 </div>
-                <div id="webcam-container" class="webcam-frame"></div>
+                <div id="preview-container" class="webcam-frame"></div>
                 <div id="label-container" class="label-stack"></div>
             </div>
         </header>
@@ -33,11 +34,11 @@
         <section class="insight-grid">
             <div class="insight">
                 <h2>How It Works</h2>
-                <p>We use your Teachable Machine model to classify dog vs. cat in each frame, then translate the confidence into a playful result.</p>
+                <p>We use your Teachable Machine model to classify dog vs. cat from your uploaded photo, then translate the confidence into a playful result.</p>
             </div>
             <div class="insight">
                 <h2>Result Meter</h2>
-                <p>Watch the live bar to see which vibe is winning. The highest confidence becomes your animal match.</p>
+                <p>Watch the bar to see which vibe is winning. The highest confidence becomes your animal match.</p>
             </div>
             <div class="insight">
                 <h2>Share It</h2>

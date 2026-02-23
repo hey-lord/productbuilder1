@@ -1,16 +1,13 @@
 const themeToggle = document.getElementById('theme-toggle');
-const startBtn = document.getElementById('start-btn');
 const statusPill = document.getElementById('status-pill');
 const labelContainer = document.getElementById('label-container');
-const webcamContainer = document.getElementById('webcam-container');
+const previewContainer = document.getElementById('preview-container');
+const photoInput = document.getElementById('photo-input');
 
 const THEME_KEY = 'animal-test-theme';
 const MODEL_URL = 'https://teachablemachine.withgoogle.com/models/M9Ltpfr5A/';
 
 let model;
-let webcam;
-let maxPredictions = 0;
-let rafId;
 
 const getSystemTheme = () => {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -81,55 +78,58 @@ const updatePredictionUI = (prediction) => {
     result.textContent = `${top.className} vibe: ${confidence}%`;
 };
 
-const attachWebcam = () => {
-    webcamContainer.innerHTML = '';
-    webcamContainer.appendChild(webcam.canvas);
-};
-
 const initModel = async () => {
+    if (model) {
+        return;
+    }
     const modelURL = `${MODEL_URL}model.json`;
     const metadataURL = `${MODEL_URL}metadata.json`;
     model = await window.tmImage.load(modelURL, metadataURL);
-    maxPredictions = model.getTotalClasses();
 };
 
-const startCamera = async () => {
-    startBtn.disabled = true;
-    startBtn.textContent = 'Starting...';
-    setStatus('Loading');
+const showPlaceholder = (message) => {
+    previewContainer.innerHTML = `<div class="webcam-placeholder">${message}</div>`;
+};
 
-    try {
-        if (!model) {
-            await initModel();
-        }
+const renderImage = (src) => {
+    previewContainer.innerHTML = '';
+    const img = document.createElement('img');
+    img.alt = 'Uploaded photo';
+    img.src = src;
+    previewContainer.appendChild(img);
+    return img;
+};
 
-        if (!webcam) {
-            webcam = new window.tmImage.Webcam(280, 280, true);
-            await webcam.setup();
-        }
-
-        await webcam.play();
-        attachWebcam();
-        const prediction = await model.predict(webcam.canvas);
-        buildLabelRows(prediction);
-        setStatus('Live');
-        startBtn.textContent = 'Restart Camera';
-        startBtn.disabled = false;
-        loop();
-    } catch (error) {
-        console.error(error);
-        setStatus('Blocked');
-        startBtn.textContent = 'Retry Camera';
-        startBtn.disabled = false;
-        webcamContainer.innerHTML = '<div class="webcam-placeholder">Camera access is required. Please allow permissions and try again.</div>';
+const handleFile = async (file) => {
+    if (!file) {
+        return;
     }
-};
 
-const loop = async () => {
-    webcam.update();
-    const prediction = await model.predict(webcam.canvas);
-    updatePredictionUI(prediction);
-    rafId = window.requestAnimationFrame(loop);
+    if (!file.type.startsWith('image/')) {
+        setStatus('Invalid');
+        showPlaceholder('Please upload a valid image file.');
+        return;
+    }
+
+    setStatus('Loading');
+    const reader = new FileReader();
+    reader.onload = async () => {
+        try {
+            await initModel();
+            const img = renderImage(reader.result);
+            img.onload = async () => {
+                const prediction = await model.predict(img);
+                buildLabelRows(prediction);
+                updatePredictionUI(prediction);
+                setStatus('Ready');
+            };
+        } catch (error) {
+            console.error(error);
+            setStatus('Error');
+            showPlaceholder('Something went wrong. Please try another photo.');
+        }
+    };
+    reader.readAsDataURL(file);
 };
 
 themeToggle.addEventListener('click', () => {
@@ -139,12 +139,10 @@ themeToggle.addEventListener('click', () => {
     applyTheme(next);
 });
 
-startBtn.addEventListener('click', () => {
-    if (rafId) {
-        window.cancelAnimationFrame(rafId);
-    }
-    startCamera();
+photoInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    handleFile(file);
 });
 
-webcamContainer.innerHTML = '<div class="webcam-placeholder">Click Start Camera to begin.</div>';
+showPlaceholder('Upload a selfie to begin.');
 initTheme();
