@@ -3,66 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lotto Number Generator</title>
+    <title>Animal Face Test</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Lotto Number Generator</h1>
-            <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
-                Dark mode
-            </button>
-        </div>
-        <div class="number-container">
-        </div>
-        <button id="generate-btn">Generate Numbers</button>
-        <section class="form-section" aria-labelledby="partner-title">
-            <h2 id="partner-title">Partnership Inquiry</h2>
-            <p class="form-subtitle">Tell us about your proposal. We'll get back within 2 business days.</p>
-            <form class="partner-form" action="https://formspree.io/f/mpqjoqlk" method="POST">
-                <label class="field">
-                    <span>Name</span>
-                    <input type="text" name="name" placeholder="Jane Kim" required>
-                </label>
-                <label class="field">
-                    <span>Email</span>
-                    <input type="email" name="email" placeholder="jane@company.com" required>
-                </label>
-                <label class="field">
-                    <span>Company</span>
-                    <input type="text" name="company" placeholder="Acme Labs">
-                </label>
-                <label class="field">
-                    <span>Message</span>
-                    <textarea name="message" rows="4" placeholder="Briefly describe the partnership idea." required></textarea>
-                </label>
-                <button class="submit-btn" type="submit">Send Inquiry</button>
-            </form>
+    <div class="ambient"></div>
+    <main class="page">
+        <header class="hero">
+            <div>
+                <p class="eyebrow">Animal Face Test</p>
+                <h1>Are you more puppy or kitty today?</h1>
+                <p class="subtitle">Our model reads your vibe in real time. Turn on your camera, smile, and see your animal twin.</p>
+                <div class="cta-row">
+                    <button id="start-btn" class="primary-btn" type="button">Start Camera</button>
+                    <button id="theme-toggle" class="ghost-btn" type="button" aria-pressed="false">Dark mode</button>
+                </div>
+                <p class="microcopy">We never store your video. All processing happens in your browser.</p>
+            </div>
+            <div class="hero-card">
+                <div class="card-header">
+                    <span>Live Preview</span>
+                    <span id="status-pill" class="status-pill">Idle</span>
+                </div>
+                <div id="webcam-container" class="webcam-frame"></div>
+                <div id="label-container" class="label-stack"></div>
+            </div>
+        </header>
+
+        <section class="insight-grid">
+            <div class="insight">
+                <h2>How It Works</h2>
+                <p>We use your Teachable Machine model to classify dog vs. cat in each frame, then translate the confidence into a playful result.</p>
+            </div>
+            <div class="insight">
+                <h2>Result Meter</h2>
+                <p>Watch the live bar to see which vibe is winning. The highest confidence becomes your animal match.</p>
+            </div>
+            <div class="insight">
+                <h2>Share It</h2>
+                <p>Capture a screenshot of your result and share it with friends. Challenge them to beat your score.</p>
+            </div>
         </section>
-    </div>
-    <footer>
-        <p>&copy; 2023 Lotto Number Generator</p>
+    </main>
+    <footer class="site-footer">
+        <p>&copy; 2026 Animal Face Test. Built with Teachable Machine.</p>
     </footer>
-    <section class="comments-section" aria-labelledby="comments-title">
-        <h2 id="comments-title">Comments</h2>
-        <div id="disqus_thread"></div>
-        <script>
-            /*
-            var disqus_config = function () {
-            this.page.url = PAGE_URL;
-            this.page.identifier = PAGE_IDENTIFIER;
-            };
-            */
-            (function() {
-                var d = document, s = d.createElement('script');
-                s.src = 'https://productbuilder1-4.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </section>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
