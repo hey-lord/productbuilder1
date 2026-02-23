@@ -47,6 +47,72 @@ h1 {
     color: var(--text);
 }
 
+.form-section {
+    margin-top: 2.5rem;
+    text-align: left;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(127, 127, 127, 0.2);
+}
+
+.form-section h2 {
+    margin: 0 0 0.4rem;
+    font-size: 1.3rem;
+}
+
+.form-subtitle {
+    margin: 0 0 1.2rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.partner-form {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.field {
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+}
+
+.field span {
+    color: var(--text);
+}
+
+.field input,
+.field textarea {
+    border: 1px solid rgba(127, 127, 127, 0.35);
+    border-radius: 8px;
+    padding: 0.7rem 0.8rem;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 0.95rem;
+}
+
+.field input:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.25);
+}
+
+.submit-btn {
+    background-color: var(--accent);
+    color: white;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    justify-self: start;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: var(--accent-hover);
+}
+
 .header {
     display: flex;
     align-items: center;

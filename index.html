@@ -17,6 +17,29 @@
         <div class="number-container">
         </div>
         <button id="generate-btn">Generate Numbers</button>
+        <section class="form-section" aria-labelledby="partner-title">
+            <h2 id="partner-title">Partnership Inquiry</h2>
+            <p class="form-subtitle">Tell us about your proposal. We'll get back within 2 business days.</p>
+            <form class="partner-form" action="https://formspree.io/f/mpqjoqlk" method="POST">
+                <label class="field">
+                    <span>Name</span>
+                    <input type="text" name="name" placeholder="Jane Kim" required>
+                </label>
+                <label class="field">
+                    <span>Email</span>
+                    <input type="email" name="email" placeholder="jane@company.com" required>
+                </label>
+                <label class="field">
+                    <span>Company</span>
+                    <input type="text" name="company" placeholder="Acme Labs">
+                </label>
+                <label class="field">
+                    <span>Message</span>
+                    <textarea name="message" rows="4" placeholder="Briefly describe the partnership idea." required></textarea>
+                </label>
+                <button class="submit-btn" type="submit">Send Inquiry</button>
+            </form>
+        </section>
     </div>
     <footer>
         <p>&copy; 2023 Lotto Number Generator</p>
