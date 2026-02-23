@@ -44,6 +44,25 @@
     <footer>
         <p>&copy; 2023 Lotto Number Generator</p>
     </footer>
+    <section class="comments-section" aria-labelledby="comments-title">
+        <h2 id="comments-title">Comments</h2>
+        <div id="disqus_thread"></div>
+        <script>
+            /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;
+            this.page.identifier = PAGE_IDENTIFIER;
+            };
+            */
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://productbuilder1-4.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </section>
     <script src="main.js"></script>
 </body>
 </html>
